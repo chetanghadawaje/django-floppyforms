@@ -13,14 +13,17 @@ from django.forms.widgets import FILE_INPUT_CONTRADICTION
 from django.conf import settings
 from django.template import loader
 from django.utils.html import conditional_escape
-from django.utils.translation import ugettext_lazy as _
+if django.VERSION >= (3, 0):
+    # See https://docs.djangoproject.com/en/dev/releases/3.0/#features-deprecated-in-3-0
+    from django.utils.translation import gettext_lazy as _
+else:
+    from django.utils.translation import ugettext_lazy as _
 from django.utils import datetime_safe, formats, six
 from django.utils.dates import MONTHS
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
 from .compat import MULTIVALUE_DICT_TYPES, flatten_contexts
-
 
 RE_DATE = re.compile(r'(\d{4})-(\d\d?)-(\d\d?)$')
 
